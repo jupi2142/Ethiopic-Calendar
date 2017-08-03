@@ -39,7 +39,7 @@ def ethCopticToJDN(year, month, day, era):
 
 def jdnToGregorian(jdn, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN, leapYear=calendar.isleap):
     """
-    converts JDN to Gregorian
+    Converts JDN to Gregorian
 
     :jdn:
     :JD_OFFSET:
@@ -87,7 +87,7 @@ def guessEra(jdn, JD_AM=JD_EPOCH_OFFSET_AMETE_MIHRET, JD_AA=JD_EPOCH_OFFSET_AMET
 
 
 def gregorianToJDN(year=1, month=1, day=1, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN):
-    """/**
+    """
     Given year, month and day of Gregorian returns JDN
 
     :year:
@@ -104,7 +104,7 @@ def gregorianToJDN(year=1, month=1, day=1, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN):
 
 def jdnToEthiopic(jdn, era=JD_EPOCH_OFFSET_AMETE_MIHRET):
     """
-    given a JDN and an era returns the Ethiopic equivalent
+    Given a JDN and an era returns the Ethiopic equivalent
 
     :jdn:
     :era:
