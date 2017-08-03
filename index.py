@@ -22,29 +22,29 @@ def mod(i, j):
 
 def ethCopticToJDN(year, month, day, era):
     """
-    *  Computes the Julian day number of the given Coptic or Ethiopic date.
-    *  This method assumes that the JDN epoch offset has been set. This method
-    *  is called by copticToGregorian and ethiopicToGregorian which will set
-    *  the jdn offset context.
-    *
-    *  @param {Number} year year in the Ethiopic calendar
-    *  @param {Number} month month in the Ethiopic calendar
-    *  @param {Number} day date in the Ethiopic calendar
-    *  @param {Number} era [description]
-    *
-    *  @return {Number} The Julian Day Number (JDN)
+    Computes the Julian day number of the given Coptic or Ethiopic date.
+    This method assumes that the JDN epoch offset has been set. This method
+    is called by copticToGregorian and ethiopicToGregorian which will set
+    the jdn offset context.
+
+    :year: year in the Ethiopic calendar
+    :month: month in the Ethiopic calendar
+    :day: date in the Ethiopic calendar
+    :era: [description]
+
+    :returns: The Julian Day Number (JDN)
     """
     return (era + 365) + 365 * (year - 1) + (year / 4) + 30 * month + day - 31
 
 
 def jdnToGregorian(jdn, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN, leapYear=calendar.isleap):
     """
-    * converts JDN to Gregorian
-    *
-    * @param  {Number} jdn
-    * @param  {Number} JD_OFFSET
-    * @param  {Function} leapYear
-    * @return {Number}
+    converts JDN to Gregorian
+
+    :jdn:
+    :JD_OFFSET:
+    :leapYear:
+    :returns:
     """
     nMonths = 12
     monthDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -78,24 +78,23 @@ def jdnToGregorian(jdn, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN, leapYear=calendar.i
 
 def guessEra(jdn, JD_AM=JD_EPOCH_OFFSET_AMETE_MIHRET, JD_AA=JD_EPOCH_OFFSET_AMETE_ALEM):
     """
-    * guesses ERA from JDN
-    *
-    * @param  {Number} jdn
-    * @return {Number}
+    Guesses ERA from JDN
+
+    :jdn:
+    :returns: {Number}
     """
     return JD_AM if jdn >= (JD_AM + 365) else JD_AA
 
 
 def gregorianToJDN(year=1, month=1, day=1, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN):
     """/**
-    * given year, month and day of Gregorian returns JDN
-    *
-    * @param  {Number} year
-    * @param  {Number} month
-    * @param  {Number} day
-    * @param  {Number} JD_OFFSET
-    * @return {Number}
-    */
+    Given year, month and day of Gregorian returns JDN
+
+    :year:
+    :month:
+    :day:
+    :JD_OFFSET:
+    :returns:
     """
     s = (year / 4) - ((year - 1) / 4) - (year / 100) + ((year - 1) / 100) + (year / 400) - ((year - 1) / 400)
     t = ((14 - month) / 12)
@@ -103,14 +102,13 @@ def gregorianToJDN(year=1, month=1, day=1, JD_OFFSET=JD_EPOCH_OFFSET_GREGORIAN):
     j = JD_OFFSET + 365 * (year - 1) + ((year - 1) / 4) - ((year - 1) / 100) + ((year - 1) / 400) + n
     return j
 
-
 def jdnToEthiopic(jdn, era=JD_EPOCH_OFFSET_AMETE_MIHRET):
     """
-    * given a JDN and an era returns the Ethiopic equivalent
-    *
-    * @param  {Number} jdn
-    * @param  {Number} era
-    * @return {Object} { year, month, day }
+    given a JDN and an era returns the Ethiopic equivalent
+
+    :jdn:
+    :era:
+    :returns: (year, month, day)
     """
     r = mod((jdn - era), 1461)
     n = mod(r, 365) + 365 * (r / 1460)
