@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from index import (JD_EPOCH_OFFSET_AMETE_ALEM, ethiopicToGregorian,
-                   gregorianToEthiopic)
+
+from index import (JD_EPOCH_OFFSET_AMETE_ALEM, ethiopian_to_gregorian,
+                   gregorian_to_ethiopic)
 
 print "Started testing"
 
@@ -47,7 +48,7 @@ ethiopic_to_gregorian_pairs = [
 ]
 
 for ethiopic, gregorian in ethiopic_to_gregorian_pairs:
-    assert ethiopicToGregorian(*ethiopic) == gregorian, gregorian
+    assert ethiopian_to_gregorian(*ethiopic) == gregorian, gregorian
 
 
 gregorian_to_ethiopic_pairs = [
@@ -91,6 +92,6 @@ gregorian_to_ethiopic_pairs = [
 ]
 
 for gregorian, ethiopic in gregorian_to_ethiopic_pairs:
-    assert gregorianToEthiopic(*gregorian) == ethiopic, ethiopic
+    assert gregorian_to_ethiopic(*gregorian) == ethiopic, ethiopic
 
 print "Great success"
