@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import calendar
+from datetime import date
 
 JD_EPOCH_OFFSET_AMETE_ALEM = -285019    # ዓ/ዓ
 JD_EPOCH_OFFSET_AMETE_MIHRET = 1723856  # ዓ/ም
@@ -120,11 +121,20 @@ def ethiopian_to_gregorian(year=1,
                            month=1,
                            day=1,
                            era=JD_EPOCH_OFFSET_AMETE_MIHRET):
+    if month not in range(1, 14):
+        raise ValueError("Invalid month")
+    if year <= 0:
+        raise ValueError("Invalid year")
+    if day not in range(1, 31):
+        raise ValueError("Invalid day")
+    if month == 13 and day not in range(1, 7):  # How about non leap year Pagume
+        raise ValueError("Invalid day")
     return julian_day_number_to_gregorian(
         ethiopian_coptic_to_julian_day_number(year, month, day, era)
     )
 
 
 def gregorian_to_ethiopic(year=1, month=1, day=1):
+    date(year=year, month=month, day=day)
     jdn = gregorian_to_julian_day_number(year, month, day)
     return julian_day_number_to_ethiopic(jdn, guessEra(jdn))
