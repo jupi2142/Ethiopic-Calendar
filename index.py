@@ -1,23 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-"""
-* This is a Python port of https://github.com/utopiaio/Ethiopic-Calendar
-*
-* For more info have a look at: http://www.geez.org/Calendars/
-* Java Code at https://github.com/geezorg/geezorg.github.io/blob/master/Calendars/EthiopicCalendar.java
-* JavaScript Code at https://github.com/utopiaio/Ethiopic-Calendar
-*/
-"""
 import calendar
 
 JD_EPOCH_OFFSET_AMETE_ALEM = -285019    # ዓ/ዓ
 JD_EPOCH_OFFSET_AMETE_MIHRET = 1723856  # ዓ/ም
 JD_EPOCH_OFFSET_GREGORIAN = 1721426
-
-
-def mod(i, j):
-    return (i - (j * (i / j)))
 
 
 def ethiopian_coptic_to_julian_day_number(year, month, day, era):
@@ -51,12 +38,12 @@ def julian_day_number_to_gregorian(jdn,
     nMonths = 12
     monthDays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-    r2000 = mod((jdn - JD_OFFSET), 730485)
-    r400 = mod((jdn - JD_OFFSET), 146097)
-    r100 = mod(r400, 36524)
-    r4 = mod(r100, 1461)
+    r2000 = (jdn - JD_OFFSET) % 730485
+    r400 = (jdn - JD_OFFSET) % 146097
+    r100 = r400 % 36524
+    r4 = r100 % 1461
 
-    n = mod(r4, 365) + 365 * (r4 / 1460)
+    n = (r4 % 365) + 365 * (r4 / 1460)
     s = (r4 / 1095)
     aprime = 400 * ((jdn - JD_OFFSET) / 146097) + 100 * (r400 / 36524) + 4 * (
         r100 / 1461) + (r4 / 365) - (r4 / 1460) - (r2000 / 730484)
@@ -121,11 +108,11 @@ def julian_day_number_to_ethiopic(jdn, era=JD_EPOCH_OFFSET_AMETE_MIHRET):
     :era:
     :returns: (year, month, day)
     """
-    r = mod((jdn - era), 1461)
-    n = mod(r, 365) + 365 * (r / 1460)
+    r = ((jdn - era) % 1461)
+    n = (r % 365) + 365 * (r / 1460)
     year = 4 * ((jdn - era) / 1461) + (r / 365) - (r / 1460)
     month = (n / 30) + 1
-    day = mod(n, 30) + 1
+    day = (n % 30) + 1
     return year, month, day
 
 
